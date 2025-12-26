@@ -26,6 +26,7 @@ public class App implements Callable<Integer> {
 
     @Override
     public Integer call() throws Exception {
+        Differ.generate(filepath1, filepath2, format);
         return 0;
     }
 
@@ -35,5 +36,11 @@ public class App implements Callable<Integer> {
             defaultValue = "stylish"
     )
     private String format;
+
+    @CommandLine.Parameters(index = "0", description = "path to first file")
+    private String filepath1;
+
+    @CommandLine.Parameters(index = "1", description = "path to second file")
+    private String filepath2;
 
 }
