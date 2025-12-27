@@ -24,6 +24,20 @@ public class App implements Callable<Integer> {
         System.exit(exitCode);
     }
 
+    /**
+     * Entry point of the CLI application logic.
+     * <p>
+     * This method is invoked by picocli after all command-line arguments
+     * have been successfully parsed and validated.
+     * <p>
+     * It generates a difference between two configuration files and prints
+     * the result to standard output.
+     *
+     * @return exit code of the application:
+     *         {@code 0} if the difference was generated successfully,
+     *         non-zero value otherwise
+     * @throws Exception if an error occurs during file reading or comparison
+     */
     @Override
     public Integer call() throws Exception {
         Differ.generate(filepath1, filepath2, format);

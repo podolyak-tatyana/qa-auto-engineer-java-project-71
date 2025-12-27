@@ -1,7 +1,8 @@
 plugins {
-    id("java")
     id("com.github.ben-manes.versions") version "0.52.0"
     id("application")
+    id("org.sonarqube") version "7.0.1.6134"
+    id("checkstyle")
 }
 
 group = "hexlet.code"
@@ -26,6 +27,13 @@ tasks.test {
 
 application {
     mainClass = "hexlet.code.App"
+}
+
+sonar {
+    properties {
+        property("sonar.projectKey", "podolyak-tatyana_qa-auto-engineer-java-project-71")
+        property("sonar.organization", "podolyak-tatyana")
+    }
 }
 
 
