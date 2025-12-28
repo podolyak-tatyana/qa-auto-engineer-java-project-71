@@ -9,7 +9,8 @@ import java.util.Map;
 public class Parser {
 
     private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
-    private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>(){ };
+    private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
+    };
 
     private static final ObjectMapper YML_MAPPER = new YAMLMapper();
 
