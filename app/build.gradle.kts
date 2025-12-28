@@ -20,6 +20,7 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("info.picocli:picocli:4.7.7")
     implementation("tools.jackson.core:jackson-databind:3.0.3")
+    implementation("tools.jackson.dataformat:jackson-dataformat-yaml:3.0.3")
 }
 
 tasks.test {

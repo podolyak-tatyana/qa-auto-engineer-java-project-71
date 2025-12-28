@@ -1,0 +1,23 @@
+package hexlet.code;
+
+import tools.jackson.core.type.TypeReference;
+import tools.jackson.databind.ObjectMapper;
+import tools.jackson.dataformat.yaml.YAMLMapper;
+
+import java.util.Map;
+
+public class Parser {
+
+    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>(){ };
+
+    private static final ObjectMapper YML_MAPPER = new YAMLMapper();
+
+    public static Map<String, Object> parse(String fileContent, Format format) {
+        if (format.equals(Format.JSON)) {
+            return JSON_MAPPER.readValue(fileContent, MAP_TYPE);
+        } else {
+            return YML_MAPPER.readValue(fileContent, MAP_TYPE);
+        }
+    }
+}

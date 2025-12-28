@@ -1,8 +1,5 @@
 package hexlet.code;
 
-import tools.jackson.core.type.TypeReference;
-import tools.jackson.databind.ObjectMapper;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,19 +10,17 @@ import java.util.TreeSet;
 
 public class Differ {
 
-    private static final ObjectMapper MAPPER = new ObjectMapper();
-    private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
-    };
-
-    public static String generate(String filePath1, String filePath2, String format) throws IOException {
+    public static String generate(String filePath1, String filePath2, String strFormat) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
 
         String fileContent1 = Files.readString(path1);
         String fileContent2 = Files.readString(path2);
 
-        Map<String, Object> map1 = parseJsonToMap(fileContent1);
-        Map<String, Object> map2 = parseJsonToMap(fileContent2);
+        Format format = parseFormat(strFormat);
+
+        Map<String, Object> map1 = Parser.parse(fileContent1, format);
+        Map<String, Object> map2 = Parser.parse(fileContent2, format);
 
         StringBuilder result = new StringBuilder();
         result.append("{\n");
@@ -61,10 +56,6 @@ public class Differ {
         return result.toString();
     }
 
-    private static Map<String, Object> parseJsonToMap(String json) {
-        return MAPPER.readValue(json, MAP_TYPE);
-    }
-
     private static boolean valuesEqual(Object a, Object b) {
         if (a == b) {
             return true;
@@ -80,5 +71,9 @@ public class Differ {
             return "null";
         }
         return value.toString();
+    }
+
+    private static Format parseFormat(String value) {
+        return Format.getFormatByString(value);
     }
 }

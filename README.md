@@ -7,5 +7,7 @@
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=podolyak-tatyana_qa-auto-engineer-java-project-71&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=podolyak-tatyana_qa-auto-engineer-java-project-71)
 
 
-## задача 6 : сравнение плоских файлов
+## задача 6 : сравнение плоских файлов (json)
 ![img.png](screenshoots/img.png)
+## задача 7 : сравнение плоских файлов (yml)
+![img.png](screenshoots/yml.png)
