@@ -17,7 +17,7 @@ public class Differ {
     private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
     };
 
-    public static void generate(String filePath1, String filePath2, String format) throws IOException {
+    public static String generate(String filePath1, String filePath2, String format) throws IOException {
         Path path1 = Paths.get(filePath1).toAbsolutePath().normalize();
         Path path2 = Paths.get(filePath2).toAbsolutePath().normalize();
 
@@ -58,9 +58,10 @@ public class Differ {
         }
         result.append("}");
         System.out.println(result);
+        return result.toString();
     }
 
-    private static Map<String, Object> parseJsonToMap(String json) throws IOException {
+    private static Map<String, Object> parseJsonToMap(String json) {
         return MAPPER.readValue(json, MAP_TYPE);
     }
 
