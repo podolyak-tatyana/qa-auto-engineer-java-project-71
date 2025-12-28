@@ -12,6 +12,7 @@ public class Parser {
     private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
     };
 
+
     private static final ObjectMapper YML_MAPPER = new YAMLMapper();
 
     public static Map<String, Object> parse(String fileContent, Format format) {
