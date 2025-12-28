@@ -3,6 +3,7 @@ plugins {
     id("application")
     id("org.sonarqube") version "7.0.1.6134"
     id("checkstyle")
+    jacoco
 }
 
 group = "hexlet.code"
@@ -25,6 +26,19 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.named<Test>("test") {
+    useJUnitPlatform()
+}
+
+tasks.jacocoTestReport {
+    dependsOn(tasks.test)
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+}
+
 application {
     mainClass = "hexlet.code.App"
 }
@@ -33,6 +47,10 @@ sonar {
     properties {
         property("sonar.projectKey", "podolyak-tatyana_qa-auto-engineer-java-project-71")
         property("sonar.organization", "podolyak-tatyana")
+        property(
+            "sonar.coverage.jacoco.xmlReportPaths",
+            "build/reports/jacoco/test/jacocoTestReport.xml"
+        )
     }
 }
 

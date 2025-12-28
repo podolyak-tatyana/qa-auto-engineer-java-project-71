@@ -35,4 +35,4 @@ jobs:
         run:  |
           cd app
           chmod +x ./gradlew
-          ./gradlew build sonar --info
+          ./gradlew build jacocoTestReport build sonar --info --console=plain
