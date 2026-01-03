@@ -43,13 +43,13 @@ class DifferTest {
 
     @Test
     void generate() throws IOException {
-        var result = Differ.generate(FILE_PATH_1, FILE_PATH_2, "json");
+        var result = Differ.generate(FILE_PATH_1, FILE_PATH_2, "stylish");
         assertEquals(expected, result);
     }
 
     @Test
     void generateForYml() throws IOException {
-        var result = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "yml");
+        var result = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "stylish");
         assertEquals(expected, result);
     }
 }

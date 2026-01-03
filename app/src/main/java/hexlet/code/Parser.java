@@ -16,10 +16,9 @@ public class Parser {
     private static final ObjectMapper YML_MAPPER = new YAMLMapper();
 
     public static Map<String, Object> parse(String fileContent, Format format) {
-        if (format.equals(Format.JSON)) {
-            return JSON_MAPPER.readValue(fileContent, MAP_TYPE);
-        } else {
-            return YML_MAPPER.readValue(fileContent, MAP_TYPE);
-        }
+        return switch (format) {
+            case JSON -> JSON_MAPPER.readValue(fileContent, MAP_TYPE);
+            case YML, YAML -> YML_MAPPER.readValue(fileContent, MAP_TYPE);
+        };
     }
 }
