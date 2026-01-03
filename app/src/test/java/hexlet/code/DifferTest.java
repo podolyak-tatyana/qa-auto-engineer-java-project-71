@@ -14,7 +14,7 @@ class DifferTest {
     private static final String YML_FILE_PATH_1 = "src/test/resources/dataset/yml/file1.yml";
     private static final String YML_FILE_PATH_2 = "src/test/resources/dataset/yml/file2.yml";
 
-    private static final String expected = """
+    private static final String EXPECTED = """
                 {
                     chars1: [a, b, c]
                   - chars2: [d, e, f]
@@ -44,12 +44,12 @@ class DifferTest {
     @Test
     void generate() throws IOException {
         var result = Differ.generate(FILE_PATH_1, FILE_PATH_2, "stylish");
-        assertEquals(expected, result);
+        assertEquals(EXPECTED, result);
     }
 
     @Test
     void generateForYml() throws IOException {
         var result = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "stylish");
-        assertEquals(expected, result);
+        assertEquals(EXPECTED, result);
     }
 }

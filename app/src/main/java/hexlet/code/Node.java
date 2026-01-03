@@ -14,11 +14,11 @@ public final class Node {
     private final Object oldValue;
     private final Object newValue;
 
-    private Node(String key, Status status, Object oldValue, Object newValue) {
-        this.key = key;
-        this.status = status;
-        this.oldValue = oldValue;
-        this.newValue = newValue;
+    private Node(String keyValue, Status statusValue, Object nodeOldValue, Object nodeNewValue) {
+        this.key = keyValue;
+        this.status = statusValue;
+        this.oldValue = nodeOldValue;
+        this.newValue = nodeNewValue;
     }
 
     public static Node added(String key, Object newValue) {

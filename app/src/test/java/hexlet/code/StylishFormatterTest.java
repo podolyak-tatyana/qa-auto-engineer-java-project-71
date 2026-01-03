@@ -9,6 +9,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class StylishFormatterTest {
 
+    private static final int FIFTY = 50;
+    private static final int TWENTY = 20;
+
     @Test
     void formatShouldRenderStylishOutput() {
         LinkedHashMap<String, Object> nested = new LinkedHashMap<>();
@@ -17,8 +20,8 @@ class StylishFormatterTest {
 
         List<Node> diff = List.of(
                 Node.unchanged("host", "hexlet.io"),
-                Node.removed("timeout", 50),
-                Node.added("timeout", 20),
+                Node.removed("timeout", FIFTY),
+                Node.added("timeout", TWENTY),
                 Node.added("obj1", nested),
                 Node.removed("default", null),
                 Node.added("default", List.of("value1", "value2"))
