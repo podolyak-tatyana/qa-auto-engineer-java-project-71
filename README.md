@@ -11,3 +11,5 @@
 ![img.png](screenshoots/img.png)
 ## задача 7 : сравнение плоских файлов (yml)
 ![img.png](screenshoots/yml.png)
+## задача 9 : реализация stylish форматера 
+![img.png](screenshoots/stylish.png)
