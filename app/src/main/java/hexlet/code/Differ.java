@@ -1,5 +1,8 @@
 package hexlet.code;
 
+import hexlet.code.formatters.PlainFormatter;
+import hexlet.code.formatters.StylishFormatter;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,10 +30,10 @@ public class Differ {
 
         String fmt = (outputFormat == null || outputFormat.isBlank()) ? "stylish" : outputFormat;
 
-        if (fmt.equals("stylish")) {
-            return StylishFormatter.format(diff);
-        }
-
-        throw new IllegalArgumentException("Unsupported output format: " + fmt);
+        return switch (fmt) {
+            case "stylish" -> StylishFormatter.format(diff);
+            case "plain" -> PlainFormatter.format(diff);
+            default -> throw new IllegalArgumentException("Unsupported output format: " + fmt);
+        };
     }
 }

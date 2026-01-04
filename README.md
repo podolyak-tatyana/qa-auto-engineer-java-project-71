@@ -13,3 +13,5 @@
 ![img.png](screenshoots/yml.png)
 ## задача 9 : реализация stylish форматера 
 ![img.png](screenshoots/stylish.png)
+## задача 10 : реализация plain форматера
+![img.png](screenshoots/plain.png)

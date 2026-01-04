@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.StylishFormatter;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
