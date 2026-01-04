@@ -6,7 +6,7 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class StylishFormatTest {
+class StylishDifferTest {
 
     private static final String FILE_PATH_1 = "src/test/resources/dataset/json/file.json";
     private static final String FILE_PATH_2 = "src/test/resources/dataset/json/file2.json";

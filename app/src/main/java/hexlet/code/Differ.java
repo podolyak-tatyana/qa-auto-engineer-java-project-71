@@ -1,5 +1,6 @@
 package hexlet.code;
 
+import hexlet.code.formatters.JsonFormatter;
 import hexlet.code.formatters.PlainFormatter;
 import hexlet.code.formatters.StylishFormatter;
 
@@ -33,6 +34,7 @@ public class Differ {
         return switch (fmt) {
             case "stylish" -> StylishFormatter.format(diff);
             case "plain" -> PlainFormatter.format(diff);
+            case "json" -> JsonFormatter.format(diff);
             default -> throw new IllegalArgumentException("Unsupported output format: " + fmt);
         };
     }

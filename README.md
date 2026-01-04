@@ -15,3 +15,5 @@
 ![img.png](screenshoots/stylish.png)
 ## задача 10 : реализация plain форматера
 ![img.png](screenshoots/plain.png)
+## задача 11 : реализация json форматера
+![img.png](screenshoots/json.png)
