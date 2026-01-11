@@ -13,19 +13,21 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class JsonDifferTest {
 
-    private static final String FILE_PATH_1 = "src/test/resources/dataset/json/file.json";
-    private static final String FILE_PATH_2 = "src/test/resources/dataset/json/file2.json";
+    private static final String JSON_FILE_PATH_1 = "src/test/resources/dataset/json/file.json";
+    private static final String JSON_FILE_PATH_2 = "src/test/resources/dataset/json/file2.json";
 
     private static final String YML_FILE_PATH_1 = "src/test/resources/dataset/yml/file1.yml";
     private static final String YML_FILE_PATH_2 = "src/test/resources/dataset/yml/file2.yml";
 
-    private static final String EXPECTED_FILE = "src/test/resources/dataset/json_formater_expected.json";
+    private static final String JSON_EXPECTED_FILE = "src/test/resources/dataset/json_formater_expected.json";
+    private static final String STYLISH_EXPECTED_FILE = "src/test/resources/dataset/stylish_formater_expected.txt";
+    private static final String PLAIN_EXPECTED_FILE = "src/test/resources/dataset/plain_formater_expected.txt";
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     @Test
-    void generate() throws IOException {
-        String actual = Differ.generate(FILE_PATH_1, FILE_PATH_2, "json");
+    void generateJsonFormatForJsonFile() throws IOException {
+        String actual = Differ.generate(JSON_FILE_PATH_1, JSON_FILE_PATH_2, "json");
         JsonNode actualTree = MAPPER.readTree(actual);
 
         JsonNode expectedTree = readExpectedTree();
@@ -34,7 +36,7 @@ public class JsonDifferTest {
     }
 
     @Test
-    void generateForYml() throws IOException {
+    void generateJsonFormatForYml() throws IOException {
         String actual = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "json");
         JsonNode actualTree = MAPPER.readTree(actual);
 
@@ -43,8 +45,52 @@ public class JsonDifferTest {
         assertEquals(expectedTree, actualTree);
     }
 
+
+    @Test
+    void generateStylishFormatForJsonFile() throws IOException {
+        String actual = Differ.generate(JSON_FILE_PATH_1, JSON_FILE_PATH_2, "stylish");
+        String expected = readExpectedStylish();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void generateStylishFormatForYml() throws IOException {
+        String actual = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "stylish");
+        String expected = readExpectedStylish();
+
+        assertEquals(expected, actual);
+    }
+
+
+    @Test
+    void generatePlainFormatForJsonFile() throws IOException {
+        String actual = Differ.generate(JSON_FILE_PATH_1, JSON_FILE_PATH_2, "plain");
+        String expected = readExpectedPlain();
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void generatePlainFormatForYml() throws IOException {
+        String actual = Differ.generate(YML_FILE_PATH_1, YML_FILE_PATH_2, "plain");
+        String expected = readExpectedPlain();
+
+        assertEquals(expected, actual);
+    }
+
+
+
     private static JsonNode readExpectedTree() throws IOException {
-        String expectedContent = Files.readString(Paths.get(EXPECTED_FILE), StandardCharsets.UTF_8);
+        String expectedContent = Files.readString(Paths.get(JSON_EXPECTED_FILE), StandardCharsets.UTF_8);
         return MAPPER.readTree(expectedContent);
+    }
+
+    private String readExpectedStylish() throws IOException {
+        return Files.readString(Paths.get(STYLISH_EXPECTED_FILE), StandardCharsets.UTF_8);
+    }
+
+    private String readExpectedPlain() throws IOException {
+        return Files.readString(Paths.get(PLAIN_EXPECTED_FILE), StandardCharsets.UTF_8);
     }
 }
