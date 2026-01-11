@@ -1,7 +1,12 @@
 package hexlet.code;
 
 import org.junit.jupiter.api.Test;
+import tools.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
@@ -10,19 +15,17 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 class DiffBuilderTest {
 
-    @Test
-    void buildShouldDetectAllStatuses() {
-        Map<String, Object> map1 = Map.of(
-                "same", "value",
-                "removed", 1,
-                "updated", false
-        );
+    private static final String TEST1_MAP1_PATH = "src/test/resources/dataset/diffbuilder/test1/file1.json";
+    private static final String TEST1_MAP2_PATH = "src/test/resources/dataset/diffbuilder/test1/file2.json";
+    private static final String TEST2_MAP1_PATH = "src/test/resources/dataset/diffbuilder/test2/file1.json";
+    private static final String TEST2_MAP2_PATH = "src/test/resources/dataset/diffbuilder/test2/file2.json";
 
-        Map<String, Object> map2 = Map.of(
-                "same", "value",
-                "added", 2,
-                "updated", true
-        );
+    private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    @Test
+    void buildShouldDetectAllStatuses() throws IOException {
+        Map<String, Object> map1 = readJsonAsMap(TEST1_MAP1_PATH);
+        Map<String, Object> map2 = readJsonAsMap(TEST1_MAP2_PATH);
 
         List<Node> diff = DiffBuilder.build(map1, map2);
 
@@ -48,14 +51,9 @@ class DiffBuilderTest {
     }
 
     @Test
-    void buildShouldReturnNodesSortedByKey() {
-        Map<String, Object> map1 = Map.of(
-                "b", 1,
-                "a", 1
-        );
-        Map<String, Object> map2 = Map.of(
-                "c", 2
-        );
+    void buildShouldReturnNodesSortedByKey() throws IOException {
+        Map<String, Object> map1 = readJsonAsMap(TEST2_MAP1_PATH);
+        Map<String, Object> map2 = readJsonAsMap(TEST2_MAP2_PATH);
 
         List<Node> diff = DiffBuilder.build(map1, map2);
 
@@ -69,5 +67,10 @@ class DiffBuilderTest {
                 .filter(n -> n.getKey().equals(key))
                 .findFirst()
                 .orElseThrow(() -> new AssertionError("Node not found: " + key));
+    }
+
+    private static Map<String, Object> readJsonAsMap(String filePath) throws IOException {
+        String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
+        return MAPPER.readValue(content, Map.class);
     }
 }
