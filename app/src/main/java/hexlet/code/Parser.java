@@ -12,13 +12,13 @@ public class Parser {
     private static final TypeReference<Map<String, Object>> MAP_TYPE = new TypeReference<>() {
     };
 
-
     private static final ObjectMapper YML_MAPPER = new YAMLMapper();
 
-    public static Map<String, Object> parse(String fileContent, Format format) {
+    public static Map<String, Object> parse(String content, Format format) {
         return switch (format) {
-            case JSON -> JSON_MAPPER.readValue(fileContent, MAP_TYPE);
-            case YML, YAML -> YML_MAPPER.readValue(fileContent, MAP_TYPE);
+            case JSON -> JSON_MAPPER.readValue(content, MAP_TYPE);
+            case YML, YAML -> YML_MAPPER.readValue(content, MAP_TYPE);
+            case OTHER -> throw new IllegalArgumentException("Unsupported file format: " + format.getFormatValue());
         };
     }
 }

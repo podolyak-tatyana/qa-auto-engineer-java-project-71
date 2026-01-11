@@ -8,8 +8,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import static hexlet.code.Format.*;
 
 public class Differ {
 
@@ -21,13 +24,16 @@ public class Differ {
         String fileContent2 = Files.readString(path2);
 
         // входной формат определяется по расширению файла
-        Format inputFormat1 = Format.fromFileName(filePath1);
-        Format inputFormat2 = Format.fromFileName(filePath2);
+        Format inputFormat1 = fromFileName(filePath1);
+        Format inputFormat2 = fromFileName(filePath2);
 
         Map<String, Object> map1 = Parser.parse(fileContent1, inputFormat1);
         Map<String, Object> map2 = Parser.parse(fileContent2, inputFormat2);
+        List<Node> diff = new ArrayList<>();
 
-        List<Node> diff = DiffBuilder.build(map1, map2);
+        if (map1 != null  && map2 != null) {
+            diff = DiffBuilder.build(map1, map2);
+        }
 
         String fmt = (outputFormat == null || outputFormat.isBlank()) ? "stylish" : outputFormat;
 
@@ -36,6 +42,22 @@ public class Differ {
             case "plain" -> PlainFormatter.format(diff);
             case "json" -> JsonFormatter.format(diff);
             default -> throw new IllegalArgumentException("Unsupported output format: " + fmt);
+        };
+    }
+
+
+    public static Format fromFileName(String filePath) {
+        int dot = filePath.lastIndexOf('.');
+        if (dot == -1 || dot == filePath.length() - 1) {
+            throw new IllegalArgumentException("Cannot determine file format (no extension): " + filePath);
+        }
+
+        String extension = filePath.substring(dot + 1).toLowerCase();
+        return switch (extension) {
+            case "json" -> JSON;
+            case "yml" -> YML;
+            case "yaml" -> YAML;
+            default -> OTHER;
         };
     }
 }

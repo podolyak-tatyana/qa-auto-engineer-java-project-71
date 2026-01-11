@@ -3,6 +3,7 @@ package hexlet.code;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -39,7 +40,7 @@ public class DiffBuilder {
     }
 
     private static boolean valuesEqual(Object a, Object b) {
-        if (a == b) {
+        if (Objects.equals(a, b)) {
             return true;
         }
         if (a == null || b == null) {
